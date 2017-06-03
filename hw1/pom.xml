@@ -65,6 +65,45 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.0.8</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <proguardVersion>5.2</proguardVersion>
+                    <obfuscate>true</obfuscate>
+                    <options>
+                        <!--Подробный лог работы обфускатора-->
+                        <option>-verbose</option>
+                        <!--Позволяет менять модификаторы доступа для оптимизации-->
+                        <option>-allowaccessmodification</option>
+                        <!--Запрешаем оптимизировать класс с точкой входа, чтобы не сломать ничего-->
+                        <option>-keep class ru.otus.App { *; }</option>
+                    </options>
+                    <injar>${project.build.finalName}.jar</injar>
+                    <libs>
+                        <lib>${java.home}/lib/rt.jar</lib>
+                        <lib>${java.home}/lib/jsse.jar</lib>
+                    </libs>
+                    <outjar>${project.build.finalName}-obfuscated.jar</outjar>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>5.2</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
 
         </plugins>
     </build>
