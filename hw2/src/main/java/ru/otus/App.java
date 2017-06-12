@@ -13,18 +13,22 @@ public class App {
                 MemoryTestStand.plug(() -> new String(new char[0])).test()));
         System.out.println(MessageFormat.format("1 element int array size is {0}",
                 MemoryTestStand.plug(() -> new int[0]).test()));
-        System.out.println(MessageFormat.format("10 element int array size is {0}",
-                MemoryTestStand.plug(() -> new int[9]).test()));
         System.out.println(MessageFormat.format("100 element int array size is {0}",
                 MemoryTestStand.plug(() -> new int[99]).test()));
+        System.out.println(MessageFormat.format("1000 element int array size is {0}",
+                MemoryTestStand.plug(() -> new int[999]).test()));
+        System.out.println(MessageFormat.format("10000 element int array size is {0}",
+                MemoryTestStand.plug(() -> new int[9999]).test()));
         System.out.println(MessageFormat.format("Class size with int and long variable is {0} bytes",
                 MemoryTestStand.plug(Primitives::new).test()));
         System.out.println(MessageFormat.format("1 element Primitives array size is {0} bytes",
                 MemoryTestStand.plug(() -> new Primitives[0]).test()));
-        System.out.println(MessageFormat.format("10 element Primitives array size is {0} bytes",
-                MemoryTestStand.plug(() -> new Primitives[10]).test()));
         System.out.println(MessageFormat.format("100 element Primitives array size is {0} bytes",
-                MemoryTestStand.plug(() -> new Primitives[100]).test()));
+                MemoryTestStand.plug(() -> new Primitives[99]).test()));
+        System.out.println(MessageFormat.format("1000 element Primitives array size is {0} bytes",
+                MemoryTestStand.plug(() -> new Primitives[999]).test()));
+        System.out.println(MessageFormat.format("10000 element Primitives array size is {0} bytes",
+                MemoryTestStand.plug(() -> new Primitives[9999]).test()));
     }
 
 

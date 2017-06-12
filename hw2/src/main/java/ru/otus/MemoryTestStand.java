@@ -8,7 +8,7 @@ import java.util.function.Supplier;
  */
 public class MemoryTestStand {
     private final Supplier testObject;
-    private final int TEST_COUNT = 7_000_000;
+    private final int TEST_COUNT = 20_000;
 
 
     /**
@@ -33,6 +33,7 @@ public class MemoryTestStand {
         runGC();
         long heapBeforeObjectCreation = usedHeap();
         fillingTestObjects(testObjects);
+        runGC();
         long heapAfterObjectCreation = usedHeap();
         cleanupTestObjects(testObjects);
         return Math.round(((float) (heapAfterObjectCreation - heapBeforeObjectCreation)) / TEST_COUNT);
@@ -59,7 +60,7 @@ public class MemoryTestStand {
     private void runGC() {
         try {
             System.gc();
-            Thread.sleep(700);
+            Thread.sleep(300);
         } catch (InterruptedException e) {
             throw new RuntimeException("Error while runGC. Details:", e);
         }
