@@ -8,7 +8,7 @@ import java.util.function.Supplier;
  */
 public class MemoryTestStand {
     private final Supplier testObject;
-    private final int TEST_COUNT = 7000000;
+    private final int TEST_COUNT = 7_000_000;
 
 
     /**
@@ -52,12 +52,14 @@ public class MemoryTestStand {
         for (int i = 0; i < TEST_COUNT; ++i) {
             objects[i] = null;
         }
+        objects = null;
+        System.gc();
     }
 
     private void runGC() {
         try {
             System.gc();
-            Thread.sleep(500);
+            Thread.sleep(700);
         } catch (InterruptedException e) {
             throw new RuntimeException("Error while runGC. Details:", e);
         }
