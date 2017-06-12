@@ -2,17 +2,6 @@ package ru.otus;
 
 import java.text.MessageFormat;
 
-/**
- * VM options -Xmx512m -Xms512m
- * <p>
- * Runtime runtime = Runtime.getRuntime();
- * long mem = runtime.totalMemory() - runtime.freeMemory();
- * <p>
- * System.gc()
- * <p>
- * jconsole, connect to pid
- */
-
 
 public class App {
 
