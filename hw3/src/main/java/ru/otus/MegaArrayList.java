@@ -11,7 +11,7 @@ import static java.util.Arrays.asList;
  */
 public class MegaArrayList<T> implements List<T> {
 
-    private final int INIT_SIZE = 100;
+    private final int INIT_SIZE = 10;
     private Object[] data;
     private int indexOfLastElement;
 
@@ -271,7 +271,7 @@ public class MegaArrayList<T> implements List<T> {
 
         @Override
         public void set(T t) {
-            throw new UnsupportedOperationException();
+            data[currentPosition - 1] = t;
 
         }
 
