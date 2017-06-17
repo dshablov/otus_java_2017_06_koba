@@ -8,6 +8,8 @@ import static java.util.Arrays.asList;
  * Created by Ricoshet on 17.06.2017.
  * <p>
  * Наивная имплементация ArrayList. Потоконебезопасная.
+ * Реализованы все методы List до Java 8.
+ * В listIterator реализованы только необходимые методы для Collections.copy(..)
  */
 public class MegaArrayList<T> implements List<T> {
 
