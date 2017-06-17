@@ -51,8 +51,9 @@ public class MegaArrayList<T> implements List<T> {
 
     @Override
     public Object[] toArray() {
-        return data;
-
+        Object[] newData = new Object[indexOfLastElement + 1];
+        System.arraycopy(data, 0, newData, 0, indexOfLastElement + 1);
+        return newData;
     }
 
     @Override
