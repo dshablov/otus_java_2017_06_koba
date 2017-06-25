@@ -1,0 +1,15 @@
+Garbage collector name:G1 Young Generation
+Garbage collector name:G1 Old Generation
+Waiting OOM..
+Working time before OOM: 41s
+In 1 minute:
+Young generation calls: 751
+Old generation calls: 2
+Young generation total time to collect: 2780ms
+Old generation total time to collect: 832ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Total:
+Young generation calls: 751
+Old generation calls: 2
+Young generation total time to collect: 2780ms
+Old generation total time to collect: 832ms

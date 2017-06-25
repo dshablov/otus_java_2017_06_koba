@@ -1,0 +1,51 @@
+Garbage collector name:PS Scavenge
+Garbage collector name:PS MarkSweep
+Waiting OOM..
+Working time before OOM: 419s
+In 1 minute:
+Young generation calls: 169
+Old generation calls: 41
+Young generation total time to collect: 1285ms
+Old generation total time to collect: 15352ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+In 2 minute:
+Young generation calls: 0
+Old generation calls: 121
+Young generation total time to collect: 0ms
+Old generation total time to collect: 51795ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+In 3 minute:
+Young generation calls: 0
+Old generation calls: 125
+Young generation total time to collect: 0ms
+Old generation total time to collect: 57589ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+In 4 minute:
+Young generation calls: 0
+Old generation calls: 106
+Young generation total time to collect: 0ms
+Old generation total time to collect: 50923ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+In 5 minute:
+Young generation calls: 0
+Old generation calls: 87
+Young generation total time to collect: 0ms
+Old generation total time to collect: 42383ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+In 6 minute:
+Young generation calls: 0
+Old generation calls: 158
+Young generation total time to collect: 0ms
+Old generation total time to collect: 78003ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+In 8 minute:
+Young generation calls: 0
+Old generation calls: 177
+Young generation total time to collect: 0ms
+Old generation total time to collect: 88617ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Total:
+Young generation calls: 169
+Old generation calls: 815
+Young generation total time to collect: 1285ms
+Old generation total time to collect: 384662ms

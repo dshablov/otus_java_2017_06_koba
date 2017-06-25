@@ -1,0 +1,27 @@
+Garbage collector name:ParNew
+Garbage collector name:ConcurrentMarkSweep
+Waiting OOM..
+Working time before OOM: 121s
+In 1 minute:
+Young generation calls: 116
+Old generation calls: 9
+Young generation total time to collect: 755ms
+Old generation total time to collect: 2633ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+In 2 minute:
+Young generation calls: 0
+Old generation calls: 148
+Young generation total time to collect: 0ms
+Old generation total time to collect: 38331ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+In 3 minute:
+Young generation calls: 0
+Old generation calls: 98
+Young generation total time to collect: 0ms
+Old generation total time to collect: 31441ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Total:
+Young generation calls: 116
+Old generation calls: 255
+Young generation total time to collect: 755ms
+Old generation total time to collect: 72405ms

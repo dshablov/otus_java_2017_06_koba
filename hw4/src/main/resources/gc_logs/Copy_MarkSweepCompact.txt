@@ -1,0 +1,22 @@
+Garbage collector name:Copy
+Garbage collector name:MarkSweepCompact
+Waiting OOM..
+OOM here - 2017-06-26T00:30:47.424
+Working time before OOM: 98s
+In 1 minute:
+Young generation calls: 112
+Old generation calls: 96
+Young generation total time to collect: 903ms
+Old generation total time to collect: 20886ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+In 2 minute:
+Young generation calls: 0
+Old generation calls: 145
+Young generation total time to collect: 0ms
+Old generation total time to collect: 34700ms
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Total:
+Young generation calls: 112
+Old generation calls: 241
+Young generation total time to collect: 903ms
+Old generation total time to collect: 55586ms
