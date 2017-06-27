@@ -14,8 +14,17 @@ import java.util.Map;
 class Statistic {
     private final List<StatRecord> records;
 
+
+    public Statistic() {
+        records = new ArrayList<>();
+    }
+
     public Statistic(List<StatRecord> records) {
         this.records = records;
+    }
+
+    public void add(Statistic statistic) {
+        this.records.addAll(statistic.records);
     }
 
     public void print() {
