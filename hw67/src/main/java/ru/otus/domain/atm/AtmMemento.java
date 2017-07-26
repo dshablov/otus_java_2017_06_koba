@@ -7,6 +7,10 @@ import java.util.List;
  * Date: 26.07.2017
  * Time: 23:03
  */
+
+/**
+ * Снимок состояния банкомата
+ */
 public class AtmMemento {
     private final List<Cell> cells;
 

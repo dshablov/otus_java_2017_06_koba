@@ -73,7 +73,7 @@ public class AtmTest {
 
     @Test
     public void take600RublesWithLargeFirstStrategy() {
-        Atm atm = new Atm(1L,asList(
+        Atm atm = new Atm(1L, asList(
                 new Cell(500, 5),
                 new Cell(100, 5))
         );
@@ -84,18 +84,44 @@ public class AtmTest {
 
     @Test
     public void takeVeryLargeAmount() {
-        Atm atm = new Atm(1L,asList(
+        Atm atm = new Atm(1L, asList(
                 new Cell(500, 5),
                 new Cell(100, 5))
         );
         try {
             atm.withdraw(20000, WithdrawStrategyType.LARGE_FIRST_STRATEGY);
         } catch (NotEnoughMoneyException e) {
-            System.out.println();
         }
         assertTrue("First cell is not change", cellWith500(atm) == 5);
         assertTrue("Second cell is not change", cellWith100(atm) == 5);
     }
+
+
+    @Test
+    public void take300RublesButAtmHaveOnly200() {
+        Atm atm = new Atm(1L, asList(
+                new Cell(500, 5),
+                new Cell(100, 2))
+        );
+        try {
+            atm.withdraw(300, WithdrawStrategyType.LARGE_FIRST_STRATEGY);
+        } catch (NotEnoughMoneyException e) {
+            e.printStackTrace();
+        }
+        assertTrue("First cell is not change", cellWith500(atm) == 5);
+        assertTrue("Second cell is not change", cellWith100(atm) == 2);
+    }
+
+    @Test
+    public void atmRemainCorrect() {
+        Atm atm = new Atm(1L, asList(
+                new Cell(500, 5),
+                new Cell(100, 5))
+        );
+
+        assertTrue("Atm remain is 3000", atm.remain() == 3000);
+    }
+
 
     private Integer cellWith100(Atm atm) {
         return atm.cells().stream()

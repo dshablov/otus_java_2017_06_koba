@@ -10,6 +10,11 @@ import java.util.List;
  * Date: 24.07.2017
  * Time: 23:45
  */
+
+
+/**
+ * Стратегия выдачи, сначала пытается выдать мелкими купюрами
+ */
 public class SmallFirstWithdrawStrategy extends BasicWithdrawStrategy {
 
     public SmallFirstWithdrawStrategy(List<Cell> cells) {

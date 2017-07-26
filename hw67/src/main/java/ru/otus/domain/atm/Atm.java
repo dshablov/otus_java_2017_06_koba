@@ -16,6 +16,14 @@ public class Atm {
         this.cells = cells;
     }
 
+    /**
+     * Выдает желаемую сумму, или кидает ошибку, что денег нет. Считаем, что на вход идут суммы кратные номиналу
+     * купюр в ячейках.
+     *
+     * @param desiredAmount желаемая сумма
+     * @param desiredWithdrawTypeStrategy стратегия выдачи наличных
+     * @return
+     */
     public long withdraw(long desiredAmount, WithdrawStrategyType desiredWithdrawTypeStrategy) {
         long amount = 0;
         WithdrawStrategy withdrawStrategy = WithdrawStrategyFactory.create(desiredWithdrawTypeStrategy, cells, desiredAmount);
@@ -27,12 +35,19 @@ public class Atm {
         return amount;
     }
 
+    /**
+     *
+     * @return остаток денег в банкомате
+     */
     public long remain() {
         return cells.stream()
                 .mapToLong(Cell::remain)
                 .sum();
     }
 
+    /**
+     * @return снэпшот текущего состояния
+     */
     public AtmMemento saveState() {
         List<Cell> newCells = new ArrayList<>();
         for (Cell cell : cells) {
@@ -41,14 +56,24 @@ public class Atm {
         return new AtmMemento(newCells);
     }
 
+    /**
+     * @return восстановить состояние из снэпшота
+     */
+
     public void restore(AtmMemento memento) {
         this.cells = memento.cells();
     }
 
+    /**
+     * @return уникальный идентификатор банкомата
+     */
     public Long id() {
         return id;
     }
 
+    /**
+     * @return ячейки с купюрами
+     */
     public List<Cell> cells() {
         return cells;
     }

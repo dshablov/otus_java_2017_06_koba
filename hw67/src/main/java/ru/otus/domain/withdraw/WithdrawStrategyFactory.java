@@ -9,6 +9,7 @@ import java.util.List;
  * Date: 25.07.2017
  * Time: 0:03
  */
+
 public class WithdrawStrategyFactory {
 
     public static WithdrawStrategy create(WithdrawStrategyType withdrawStrategyType, List<Cell> cells, long desiredAmount) {

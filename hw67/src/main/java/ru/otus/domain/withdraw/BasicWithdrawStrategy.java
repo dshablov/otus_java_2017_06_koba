@@ -10,6 +10,10 @@ import java.util.List;
  * Date: 26.07.2017
  * Time: 0:34
  */
+
+/**
+ * Алгоритм поиска ячейки для выдачи, общий для двух стратегий.
+ */
 public abstract class BasicWithdrawStrategy implements WithdrawStrategy {
     private final List<Cell> cells;
 
