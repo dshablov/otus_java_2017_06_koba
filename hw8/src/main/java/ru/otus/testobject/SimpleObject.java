@@ -42,4 +42,25 @@ public class SimpleObject {
     public void setSimpleObject(SimpleObject simpleObject) {
         this.simpleObject = simpleObject;
     }
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+
+        SimpleObject that = (SimpleObject) object;
+
+        if (simpleInt != that.simpleInt) return false;
+        if (simpleString != null ? !simpleString.equals(that.simpleString) : that.simpleString != null) return false;
+        return simpleObject != null ? simpleObject.equals(that.simpleObject) : that.simpleObject == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = simpleString != null ? simpleString.hashCode() : 0;
+        result = 31 * result + simpleInt;
+        result = 31 * result + (simpleObject != null ? simpleObject.hashCode() : 0);
+        return result;
+    }
 }

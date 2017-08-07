@@ -1,9 +1,7 @@
 package ru.otus.json.handler;
 
 import org.json.simple.JSONObject;
-import ru.otus.json.TypeHandler;
-
-import java.lang.reflect.Field;
+import ru.otus.json.KJsonParser;
 
 /**
  * User: Vladimir Koba
@@ -11,10 +9,26 @@ import java.lang.reflect.Field;
  * Time: 0:50
  */
 public class EmbeddedObjectHandler extends TypeHandler {
+    private final KJsonParser parser;
+
+    public EmbeddedObjectHandler(KJsonParser parser) {
+        this.parser = parser;
+    }
+
     @Override
-    public boolean handle(JSONObject result, Field field, Object object) {
-        if (field.get(object) != null) {
-            result.put(field.getName(), toJson(field.get(object)));
+    public void handle(JSONObject result, String fieldName, Class<?> fieldType, Object fieldValue) {
+        try {
+            if (fieldValue != null) {
+                result.put(fieldName, parser.toJson(fieldValue));
+                return;
+            }
+
+            if (hasNext()) {
+                handleNext(result, fieldName,fieldType, fieldValue);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+
         }
     }
 }

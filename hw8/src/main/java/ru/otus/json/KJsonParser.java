@@ -2,13 +2,10 @@ package ru.otus.json;
 
 
 import org.json.simple.JSONObject;
-import ru.otus.json.handler.PrimitiveHandler;
-import ru.otus.json.handler.StringHandler;
+import ru.otus.json.factory.TypeHandlerFactory;
+import ru.otus.json.handler.TypeHandler;
 
 import java.lang.reflect.Field;
-import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  * User: Vladimir Koba
@@ -28,33 +25,11 @@ public class KJsonParser {
             if (object == null) {
                 return new JSONObject();
             }
-
             Field[] fields = object.getClass().getDeclaredFields();
             for (Field field : fields) {
                 field.setAccessible(true);
-                TypeHandler handlersChain = TypeHandlerFactory.createChain();
-                handlersChain.applyChain(result,field,object);
-//                Class<?> fieldType = field.getType();
-//                if (fieldType.isPrimitive()) {
-//                    result.put(field.getName(), field.get(object));
-//                } else {
-//                    switch (fieldType.getSimpleName()) {
-//                    case "List":
-//                        List list = (List) field.get(object);
-//                        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-//                        Json.createObjectBuilder().add(field.getName(), list.stream().m)
-//                        for (Object obj : list) {
-//
-//                            System.out.println(obj);
-//                        }
-////                        arrayBuilder.add(jsonObjectBuilder);
-//                        builder.add(field.getName(), arrayBuilder);
-//                        break;
-
-                        default:
-                    }
-                }
-
+                TypeHandler handlersChain = TypeHandlerFactory.createChain(this);
+                handlersChain.handle(result, field.getName(), field.getType(), field.get(object));
             }
             return result;
         } catch (Exception e) {

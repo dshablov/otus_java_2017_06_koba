@@ -1,7 +1,7 @@
-package ru.otus.json;
+package ru.otus.json.factory;
 
-import ru.otus.json.handler.PrimitiveHandler;
-import ru.otus.json.handler.StringHandler;
+import ru.otus.json.KJsonParser;
+import ru.otus.json.handler.*;
 
 import java.util.List;
 
@@ -14,10 +14,13 @@ import static java.util.Arrays.asList;
  */
 public class TypeHandlerFactory {
 
-    public static TypeHandler createChain() {
+    public static TypeHandler createChain(KJsonParser jsonParser) {
         List<TypeHandler> handlers = asList(
                 new PrimitiveHandler(),
-                new StringHandler()
+                new StringHandler(),
+                new ArrayHandler(jsonParser),
+                new ListHandler(jsonParser),
+                new EmbeddedObjectHandler(jsonParser)
         );
 
         if (handlers.size() == 0) {

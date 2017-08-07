@@ -1,9 +1,6 @@
 package ru.otus.json.handler;
 
 import org.json.simple.JSONObject;
-import ru.otus.json.TypeHandler;
-
-import java.lang.reflect.Field;
 
 /**
  * User: Vladimir Koba
@@ -13,14 +10,16 @@ import java.lang.reflect.Field;
 public class StringHandler extends TypeHandler {
 
     @Override
-    public boolean handle(JSONObject result, Field field, Object object) {
+    public void handle(JSONObject result, String fieldName, Class<?> fieldType, Object fieldValue) {
         try {
-            if (field.getType().getSimpleName().equals("String")) {
-                result.put(field.getName(), field.get(object));
-                return true;
+            if (fieldType.getSimpleName().equals("String")) {
+                result.put(fieldName, fieldValue);
+                return;
             }
-            return false;
-        } catch (IllegalAccessException e) {
+            if (hasNext()) {
+                handleNext(result, fieldName, fieldType, fieldValue);
+            }
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

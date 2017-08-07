@@ -1,10 +1,7 @@
 package ru.otus.json.handler;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.json.simple.JSONObject;
-import ru.otus.json.TypeHandler;
-
-
-import java.lang.reflect.Field;
 
 /**
  * User: Vladimir Koba
@@ -14,14 +11,16 @@ import java.lang.reflect.Field;
 public class PrimitiveHandler extends TypeHandler {
 
     @Override
-    public boolean handle(JSONObject result, Field field, Object object) {
+    public void handle(JSONObject result, String fieldName, Class<?> fieldType, Object fieldValue) {
         try {
-            if (field.getType().isPrimitive()) {
-                result.put(field.getName(), field.get(object));
-                return true;
+            if (ClassUtils.isPrimitiveOrWrapper(fieldType)) {
+                result.put(fieldName, fieldValue);
+                return;
             }
-            return false;
-        } catch (IllegalAccessException e) {
+            if (hasNext()) {
+                handleNext(result, fieldName, fieldType, fieldValue);
+            }
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

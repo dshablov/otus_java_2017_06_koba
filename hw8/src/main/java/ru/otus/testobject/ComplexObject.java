@@ -1,5 +1,6 @@
 package ru.otus.testobject;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -84,5 +85,36 @@ public class ComplexObject {
 
     public void setListSimpleObject(List<SimpleObject> listSimpleObject) {
         this.listSimpleObject = listSimpleObject;
+    }
+
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+
+        ComplexObject that = (ComplexObject) object;
+
+        if (intField != that.intField) return false;
+        if (stringField != null ? !stringField.equals(that.stringField) : that.stringField != null) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        if (!Arrays.equals(stringArray, that.stringArray)) return false;
+        if (!Arrays.equals(intArray, that.intArray)) return false;
+        if (listStringField != null ? !listStringField.equals(that.listStringField) : that.listStringField != null)
+            return false;
+        if (simpleObject != null ? !simpleObject.equals(that.simpleObject) : that.simpleObject != null) return false;
+        return listSimpleObject != null ? listSimpleObject.equals(that.listSimpleObject) : that.listSimpleObject == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = stringField != null ? stringField.hashCode() : 0;
+        result = 31 * result + Arrays.hashCode(stringArray);
+        result = 31 * result + intField;
+        result = 31 * result + Arrays.hashCode(intArray);
+        result = 31 * result + (listStringField != null ? listStringField.hashCode() : 0);
+        result = 31 * result + (simpleObject != null ? simpleObject.hashCode() : 0);
+        result = 31 * result + (listSimpleObject != null ? listSimpleObject.hashCode() : 0);
+        return result;
     }
 }
