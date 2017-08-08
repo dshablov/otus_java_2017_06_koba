@@ -9,18 +9,14 @@ import org.json.simple.JSONObject;
  */
 public class StringHandler extends TypeHandler {
 
+
     @Override
-    public void handle(JSONObject result, String fieldName, Class<?> fieldType, Object fieldValue) {
-        try {
-            if (fieldType.getSimpleName().equals("String")) {
-                result.put(fieldName, fieldValue);
-                return;
-            }
-            if (hasNext()) {
-                handleNext(result, fieldName, fieldType, fieldValue);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    protected void applyHandler(JSONObject result, String fieldName, Object fieldValue) {
+        result.put(fieldName, fieldValue);
+    }
+
+    @Override
+    protected boolean isAppliableHandler(Class<?> fieldType, Object fieldValue) {
+        return fieldType.getSimpleName().equals("String");
     }
 }

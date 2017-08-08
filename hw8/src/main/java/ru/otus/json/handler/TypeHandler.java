@@ -12,8 +12,24 @@ public abstract class TypeHandler {
     private TypeHandler next;
 
 
-    protected abstract void handle(JSONObject result, String fieldName, Class<?> fieldType, Object fieldValue);
-    
+    public void handle(JSONObject result, String fieldName, Class<?> fieldType, Object fieldValue) {
+        try {
+            if (isAppliableHandler(fieldType, fieldValue)) {
+                applyHandler(result, fieldName, fieldValue);
+                return;
+            }
+            if (hasNext()) {
+                handleNext(result, fieldName, fieldType, fieldValue);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected abstract void applyHandler(JSONObject result, String fieldName, Object fieldValue);
+
+    protected abstract boolean isAppliableHandler(Class<?> fieldType, Object fieldValue);
+
 
     protected TypeHandler handleNext(JSONObject result, String fieldName, Class<?> fieldType, Object fieldValue) {
         next.handle(result, fieldName, fieldType, fieldValue);

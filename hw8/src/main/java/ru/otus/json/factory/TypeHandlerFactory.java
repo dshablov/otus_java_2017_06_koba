@@ -13,8 +13,12 @@ import static java.util.Arrays.asList;
  * Time: 0:28
  */
 public class TypeHandlerFactory {
+    private static TypeHandler chain;
 
     public static TypeHandler createChain(KJsonParser jsonParser) {
+        if (chain != null) {
+            return chain;
+        }
         List<TypeHandler> handlers = asList(
                 new PrimitiveHandler(),
                 new StringHandler(),
@@ -24,7 +28,7 @@ public class TypeHandlerFactory {
         );
 
         if (handlers.size() == 0) {
-            return null;
+            return new EmptyHandler();
         }
         if (handlers.size() == 1) {
             return handlers.get(0);
@@ -33,6 +37,7 @@ public class TypeHandlerFactory {
         for (int i = 1; i < handlers.size(); i++) {
             currentHandler = currentHandler.linkWith(handlers.get(i));
         }
-        return handlers.get(0);
+        chain = handlers.get(0);
+        return chain;
     }
 }

@@ -20,24 +20,20 @@ public class ArrayHandler extends TypeHandler {
         this.parser = parser;
     }
 
+
     @Override
-    public void handle(JSONObject result, String fieldName, Class<?> fieldType, Object potentialArray) {
-        try {
-            if (fieldType.isArray()) {
-                TypeHandler typeHandler = TypeHandlerFactory.createChain(parser);
-                JSONObject ob = new JSONObject();
-                for (int i = 0; i < Array.getLength(potentialArray); i++) {
-                    typeHandler.handle(ob, i + "", Array.get(potentialArray, i).getClass(), Array.get(potentialArray, i));
-                }
-                result.put(fieldName, createJsonArrayFromJsonObject(ob));
-                return;
-            }
-            if (hasNext()) {
-                handleNext(result, fieldName, fieldType, potentialArray);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    protected void applyHandler(JSONObject result, String fieldName, Object potentialArray) {
+        TypeHandler typeHandler = TypeHandlerFactory.createChain(parser);
+        JSONObject ob = new JSONObject();
+        for (int i = 0; i < Array.getLength(potentialArray); i++) {
+            typeHandler.handle(ob, i + "", Array.get(potentialArray, i).getClass(), Array.get(potentialArray, i));
         }
+        result.put(fieldName, createJsonArrayFromJsonObject(ob));
+    }
+
+    @Override
+    protected boolean isAppliableHandler(Class<?> fieldType, Object fieldValue) {
+        return fieldType.isArray();
     }
 
 

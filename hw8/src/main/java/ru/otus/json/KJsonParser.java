@@ -26,9 +26,9 @@ public class KJsonParser {
                 return new JSONObject();
             }
             Field[] fields = object.getClass().getDeclaredFields();
+            TypeHandler handlersChain = TypeHandlerFactory.createChain(this);
             for (Field field : fields) {
                 field.setAccessible(true);
-                TypeHandler handlersChain = TypeHandlerFactory.createChain(this);
                 handlersChain.handle(result, field.getName(), field.getType(), field.get(object));
             }
             return result;

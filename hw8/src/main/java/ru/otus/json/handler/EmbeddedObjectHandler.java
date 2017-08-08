@@ -15,20 +15,14 @@ public class EmbeddedObjectHandler extends TypeHandler {
         this.parser = parser;
     }
 
+
     @Override
-    public void handle(JSONObject result, String fieldName, Class<?> fieldType, Object fieldValue) {
-        try {
-            if (fieldValue != null) {
-                result.put(fieldName, parser.toJson(fieldValue));
-                return;
-            }
+    protected void applyHandler(JSONObject result, String fieldName, Object fieldValue) {
+        result.put(fieldName, parser.toJson(fieldValue));
+    }
 
-            if (hasNext()) {
-                handleNext(result, fieldName,fieldType, fieldValue);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-
-        }
+    @Override
+    protected boolean isAppliableHandler(Class<?> fieldType, Object fieldValue) {
+        return fieldValue != null;
     }
 }

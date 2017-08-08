@@ -35,8 +35,8 @@ public class KJsonParserTest {
 
         KJsonParser parser = new KJsonParser();
         Gson gson = new Gson();
-        ComplexObject reooveredObject = gson.fromJson(parser.toJson(complexObject).toJSONString(), ComplexObject.class);
-        assertEquals(complexObject, reooveredObject);
+        ComplexObject recoveredObject = gson.fromJson(parser.toJson(complexObject).toJSONString(), ComplexObject.class);
+        assertEquals(complexObject, recoveredObject);
     }
 
 }
