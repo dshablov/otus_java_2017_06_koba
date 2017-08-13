@@ -28,18 +28,10 @@ public class UpdateByIdQuery extends AbstractSqlQuery implements SqlQuery {
 
     @Override
     public void addParameter(Class<?> fieldType, String name, String value) {
-        addWithApostrophsIfNeeded(fieldType, name, value);
+        addWithApostrophsIfNeeded(nameToValue, fieldType, name, value);
     }
 
-    private void addWithApostrophsIfNeeded(Class<?> fieldType, String name, String value) {
-        if (fieldType.equals(String.class)) {
-            nameToValue.put(name, "'" + value + "'");
-        } else {
-            nameToValue.put(name, value);
-        }
-    }
 
-    //                                         Дописать апдейт, сделать тест, поправить метод сейв
     @Override
     public String bulid() {
         addParametersToQueryFromObject(entity, this);

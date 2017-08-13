@@ -5,6 +5,7 @@ import entityframework.DataSet;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import java.lang.reflect.Field;
+import java.util.Map;
 
 /**
  * User: Vladimir Koba
@@ -16,6 +17,14 @@ public abstract class AbstractSqlQuery {
     protected <T extends DataSet> void addParametersToQueryFromObject(T user, SqlQuery query) {
         addFieldsFromSuperclass(user, query);
         addFieldsToInsertQuery(user.getClass().getDeclaredFields(), user, query);
+    }
+
+    protected void addWithApostrophsIfNeeded(Map<String,String> nameToValue, Class<?> fieldType, String name, String value) {
+        if (fieldType.equals(String.class)) {
+            nameToValue.put(name, "'" + value + "'");
+        } else {
+            nameToValue.put(name, value);
+        }
     }
 
     private <T extends DataSet> void addFieldsFromSuperclass(T user, SqlQuery insertQuery) {
