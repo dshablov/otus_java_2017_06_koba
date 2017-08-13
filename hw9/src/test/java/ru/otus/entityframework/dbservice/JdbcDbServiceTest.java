@@ -1,6 +1,6 @@
-package entityframework.dbservice;
+package ru.otus.entityframework.dbservice;
 
-import domain.UserDataSet;
+import ru.otus.domain.UserDataSet;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -19,10 +19,12 @@ import static junit.framework.TestCase.assertNotNull;
  */
 public class JdbcDbServiceTest {
 
+    public static final String connectionString = "jdbc:sqlite:sample.db";
+
     @BeforeClass
     public static void initDriver() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
+        try (Connection connection = DriverManager.getConnection(connectionString);
              Statement statement = connection.createStatement();) {
             statement.execute("DELETE  FROM USER");
         }
@@ -31,8 +33,8 @@ public class JdbcDbServiceTest {
 
     @Test
     public void complexTest() {
-        JdbcDbService rdbExecutor = new JdbcDbService();
-        rdbExecutor.save(new UserDataSet(5L, "Vasya", 5));
+        JdbcDbService rdbExecutor = new JdbcDbService(connectionString);
+        rdbExecutor.save(new UserDataSet(5l, "Vasya", 5));
         UserDataSet loadedUser = rdbExecutor.load(5L, UserDataSet.class);
         assertNotNull(loadedUser);
         loadedUser.setName("Petya");

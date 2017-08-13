@@ -1,6 +1,6 @@
-package entityframework.dbservice;
+package ru.otus.entityframework.dbservice;
 
-import entityframework.DataSet;
+import ru.otus.entityframework.DataSet;
 
 /**
  * User: Vladimir Koba

@@ -1,4 +1,4 @@
-package entityframework.query;
+package ru.otus.entityframework.query;
 
 /**
  * User: Vladimir Koba

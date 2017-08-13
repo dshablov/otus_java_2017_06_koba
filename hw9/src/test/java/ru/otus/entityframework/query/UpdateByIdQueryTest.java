@@ -1,6 +1,6 @@
-package entityframework.query;
+package ru.otus.entityframework.query;
 
-import domain.UserDataSet;
+import ru.otus.domain.UserDataSet;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -1,16 +1,16 @@
-package entityframework.dbservice;
+package ru.otus.entityframework.dbservice;
 
-import entityframework.DataSet;
-import entityframework.handler.SqlResultHandler;
-import entityframework.handler.SqlResultHandlerFactory;
-import entityframework.query.InsertQuery;
-import entityframework.query.SelectIdSqlQuery;
-import entityframework.query.SqlQuery;
-import entityframework.query.UpdateByIdQuery;
+import ru.otus.entityframework.DataSet;
+import ru.otus.entityframework.handler.SqlResultHandler;
+import ru.otus.entityframework.handler.SqlResultHandlerFactory;
+import ru.otus.entityframework.query.InsertQuery;
+import ru.otus.entityframework.query.SelectIdSqlQuery;
+import ru.otus.entityframework.query.SqlQuery;
+import ru.otus.entityframework.query.UpdateByIdQuery;
 
 import java.sql.*;
 
-import static entityframework.util.ReflectUtils.tableNameFromMetadata;
+import static ru.otus.entityframework.util.ReflectUtils.tableNameFromMetadata;
 
 /**
  * User: Vladimir Koba
@@ -19,6 +19,13 @@ import static entityframework.util.ReflectUtils.tableNameFromMetadata;
  */
 public class JdbcDbService implements DbService {
 
+
+    private final String connectionString;
+
+
+    public JdbcDbService(String connectionString) {
+        this.connectionString = connectionString;
+    }
 
     @Override
     public <T extends DataSet> void save(T entity) {
@@ -51,14 +58,14 @@ public class JdbcDbService implements DbService {
     }
 
     private void executeQuery(String sql) throws ClassNotFoundException, SQLException {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
+        try (Connection connection = DriverManager.getConnection(connectionString);
              Statement statement = connection.createStatement();) {
             statement.execute(sql);
         }
     }
 
     private <T> T executeSelect(String sql, SqlResultHandler<T> handler) throws ClassNotFoundException, SQLException {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
+        try (Connection connection = DriverManager.getConnection(connectionString);
              Statement statement = connection.createStatement();) {
             ResultSet resultSet = statement.executeQuery(sql);
             return handler.handle(resultSet);

@@ -1,6 +1,5 @@
-package entityframework.query;
+package ru.otus.entityframework.query;
 
-import entityframework.query.SelectIdSqlQuery;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

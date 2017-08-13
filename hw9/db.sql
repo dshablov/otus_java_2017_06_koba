@@ -1,2 +1,2 @@
-DROP TABLE IF EXISTS entity;
-CREATE TABLE user (id integer PRIMARY KEY AUTOINCREMENT , name varchar(80), age integer)
+DROP TABLE IF EXISTS user;
+CREATE TABLE user (id bigint NOT NULL PRIMARY KEY, name varchar(80), age integer)

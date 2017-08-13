@@ -1,9 +1,7 @@
-package entityframework.handler;
+package ru.otus.entityframework.handler;
 
-import domain.UserDataSet;
-import entityframework.DataSet;
-import entityframework.handler.SqlResultHandler;
-import entityframework.handler.UserDataSetSqlResultHandler;
+import ru.otus.domain.UserDataSet;
+import ru.otus.entityframework.DataSet;
 
 import java.util.HashMap;
 import java.util.Map;

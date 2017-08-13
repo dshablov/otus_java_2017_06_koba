@@ -1,7 +1,6 @@
-package entityframework;
+package ru.otus.entityframework;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 /**
  * User: Vladimir Koba
@@ -11,6 +10,8 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class DataSet {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     protected Long id;
 

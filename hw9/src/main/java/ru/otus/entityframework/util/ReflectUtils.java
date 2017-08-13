@@ -1,4 +1,4 @@
-package entityframework.util;
+package ru.otus.entityframework.util;
 
 import javax.persistence.Table;
 

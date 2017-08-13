@@ -1,6 +1,6 @@
-package domain;
+package ru.otus.domain;
 
-import entityframework.DataSet;
+import ru.otus.entityframework.DataSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +24,10 @@ public class UserDataSet extends DataSet {
         super(id);
         this.name = name;
         this.age = age;
+    }
+
+    private UserDataSet() {
+        super(null);
     }
 
     public String getName() {

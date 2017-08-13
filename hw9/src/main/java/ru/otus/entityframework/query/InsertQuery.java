@@ -1,6 +1,6 @@
-package entityframework.query;
+package ru.otus.entityframework.query;
 
-import entityframework.DataSet;
+import ru.otus.entityframework.DataSet;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

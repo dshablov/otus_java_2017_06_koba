@@ -1,6 +1,6 @@
-package entityframework.handler;
+package ru.otus.entityframework.handler;
 
-import domain.UserDataSet;
+import ru.otus.domain.UserDataSet;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

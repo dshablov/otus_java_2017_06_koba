@@ -1,4 +1,4 @@
-package entityframework.handler;
+package ru.otus.entityframework.handler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
