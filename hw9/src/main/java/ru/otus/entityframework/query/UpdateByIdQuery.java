@@ -3,16 +3,14 @@ package ru.otus.entityframework.query;
 import ru.otus.entityframework.DataSet;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: Vladimir Koba
  * Date: 09.08.2017
  * Time: 23:58
  */
-public class UpdateByIdQuery extends ChangeTableQuery{
+public class UpdateByIdQuery extends ChangeTableQuery {
 
 
     public UpdateByIdQuery(String tableName, DataSet entity) {
