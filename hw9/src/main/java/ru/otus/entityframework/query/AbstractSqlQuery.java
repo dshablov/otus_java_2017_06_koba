@@ -12,11 +12,11 @@ import java.util.Map;
  * Date: 13.08.2017
  * Time: 22:30
  */
-public abstract class AbstractSqlQuery {
+public abstract class AbstractSqlQuery implements SqlQuery{
 
     protected <T extends DataSet> void addParametersToQueryFromObject(T user, SqlQuery query) {
         addFieldsFromSuperclass(user, query);
-        addFieldsToInsertQuery(user.getClass().getDeclaredFields(), user, query);
+        addFieldsToQuery(user.getClass().getDeclaredFields(), user, query);
     }
 
     protected void addWithApostrophsIfNeeded(Map<String,String> nameToValue, Class<?> fieldType, String name, String value) {
@@ -29,11 +29,11 @@ public abstract class AbstractSqlQuery {
 
     private <T extends DataSet> void addFieldsFromSuperclass(T user, SqlQuery insertQuery) {
         if (user.getClass().getSuperclass().isAnnotationPresent(MappedSuperclass.class)) {
-            addFieldsToInsertQuery(user.getClass().getSuperclass().getDeclaredFields(), user, insertQuery);
+            addFieldsToQuery(user.getClass().getSuperclass().getDeclaredFields(), user, insertQuery);
         }
     }
 
-    private <T extends DataSet> void addFieldsToInsertQuery(Field[] fields, T user, SqlQuery insertQuery) {
+    private <T extends DataSet> void addFieldsToQuery(Field[] fields, T user, SqlQuery insertQuery) {
         try {
             for (Field field : fields) {
                 field.setAccessible(true);
@@ -43,6 +43,7 @@ public abstract class AbstractSqlQuery {
             throw new RuntimeException();
         }
     }
+
 
 
     private String columnNameFromMetadata(Field field) {

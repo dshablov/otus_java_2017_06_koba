@@ -2,38 +2,22 @@ package ru.otus.entityframework.query;
 
 import ru.otus.entityframework.DataSet;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 /**
  * User: Vladimir Koba
  * Date: 09.08.2017
  * Time: 23:58
  */
-public class InsertQuery extends AbstractSqlQuery implements SqlQuery  {
-
-    private final String tableName;
-    private final Map<String, String> nameToValue;
-    private final DataSet entity;
+public class InsertQuery extends ChangeTableQuery {
 
 
-    public  InsertQuery(String tableName, DataSet entity) {
-        this.tableName = tableName;
-        this.entity = entity;
-        nameToValue = new LinkedHashMap<>();
+    public InsertQuery(String tableName, DataSet entity) {
+        super(tableName, entity);
     }
-
-
-    @Override
-    public void addParameter(Class<?> fieldType, String name, String value) {
-        addWithApostrophsIfNeeded(nameToValue, fieldType, name, value);
-    }
-
 
 
     @Override
     public String bulid() {
-        addParametersToQueryFromObject(entity,this);
+        addParametersToQueryFromObject(entity, this);
         return "insert into %tableName% (%names%) values (%values%)"
                 .replaceAll("%tableName%", tableName)
                 .replaceAll("%names%", String.join(",", nameToValue.keySet()))

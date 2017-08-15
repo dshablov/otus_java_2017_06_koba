@@ -12,26 +12,14 @@ import java.util.Map;
  * Date: 09.08.2017
  * Time: 23:58
  */
-public class UpdateByIdQuery extends AbstractSqlQuery implements SqlQuery {
-
-    private final String tableName;
-    private final DataSet entity;
-    private final Map<String, String> nameToValue;
+public class UpdateByIdQuery extends ChangeTableQuery{
 
 
     public UpdateByIdQuery(String tableName, DataSet entity) {
-        this.tableName = tableName;
-        this.entity = entity;
-        nameToValue = new LinkedHashMap<>();
+        super(tableName,entity);
     }
 
-
-    @Override
-    public void addParameter(Class<?> fieldType, String name, String value) {
-        addWithApostrophsIfNeeded(nameToValue, fieldType, name, value);
-    }
-
-
+    
     @Override
     public String bulid() {
         addParametersToQueryFromObject(entity, this);

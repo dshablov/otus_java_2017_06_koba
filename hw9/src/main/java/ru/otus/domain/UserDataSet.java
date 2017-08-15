@@ -26,9 +26,11 @@ public class UserDataSet extends DataSet {
         this.age = age;
     }
 
-    private UserDataSet() {
+    public UserDataSet() {
         super(null);
     }
+
+
 
     public String getName() {
         return name;
