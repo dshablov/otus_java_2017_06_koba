@@ -31,13 +31,13 @@
             <version>5.2.10.Final</version>
         </dependency>
 
-
-
+        
         <dependency>
-            <groupId>com.github.gwenn</groupId>
+            <groupId>org.hibernate.dialect</groupId>
             <artifactId>sqlite-dialect</artifactId>
-            <version>master</version>
+            <version>0.1.0</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.xerial</groupId>
@@ -62,9 +62,10 @@
     
 
     <repositories>
+
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
+            <id>mvnrepository</id>
+            <url>http://repo1.maven.org/maven2</url>
         </repository>
     </repositories>
 
