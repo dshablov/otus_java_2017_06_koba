@@ -12,7 +12,7 @@ import ru.otus.domain.UserDataSet;
  */
 public class CachedHibernateDbService implements DbService {
     private final HibernateDbService dbService;
-    private final CacheEngine cacheEngine;
+    private final CacheEngine<Long, UserDataSet> cacheEngine;
     private CacheInfo cacheInfo;
 
 
@@ -23,7 +23,7 @@ public class CachedHibernateDbService implements DbService {
 
     public CachedHibernateDbService() {
         this.dbService = new HibernateDbService();
-        this.cacheEngine = new SimpleCacheEngine<Long, UserDataSet>(5, 120000, 10000);
+        this.cacheEngine = new SimpleCacheEngine<>(5, 120000, 10000);
         this.cacheInfo = null;
     }
 
@@ -38,10 +38,14 @@ public class CachedHibernateDbService implements DbService {
         CacheElement<Long, UserDataSet> cachedUser = cacheEngine.get(id);
         if (cachedUser != null) {
             if (cacheInfo != null) {
-                cacheInfo.incHits();
+                cacheInfo.hits(cacheEngine.hitCount());
             }
             return cachedUser.value();
         }
-        return dbService.load(id);
+        UserDataSet loadedUser = dbService.load(id);
+        if (loadedUser != null) {
+            cacheEngine.put(new CacheElement<>(loadedUser.getId(), loadedUser));
+        }
+        return loadedUser;
     }
 }

@@ -6,17 +6,17 @@ package ru.otus.entityframework.dbservice;
  * Time: 22:20
  */
 public class CacheInfo {
-    private int cacheHits;
+    private long cacheHits;
 
-    public CacheInfo(int cacheHits) {
+    public CacheInfo(long cacheHits) {
         this.cacheHits = cacheHits;
     }
 
-    public int cacheHits() {
+    public long cacheHits() {
         return cacheHits;
     }
 
-    public void incHits() {
-        cacheHits++;
+    public void hits(long hits) {
+        this.cacheHits = hits;
     }
 }

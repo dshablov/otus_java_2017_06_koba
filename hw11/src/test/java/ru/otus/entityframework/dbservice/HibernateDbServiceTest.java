@@ -42,7 +42,6 @@ public class HibernateDbServiceTest {
         for (int i = 0; i < 100; i++) {
             rdbExecutor.load(vasya.getId());
         }
-
         assertTrue(cacheInfo.cacheHits() == 100);
 
     }

@@ -1,7 +1,6 @@
 package ru.otus.cache;
 
 import java.lang.ref.SoftReference;
-import java.lang.ref.WeakReference;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -44,13 +43,17 @@ public class SimpleCacheEngine<K, V> implements CacheEngine<K, V> {
     @Override
     public CacheElement<K, V> get(K key) {
         SoftReference<CacheElement> elementSoftReference = elements.get(key);
+        CacheElement<K, V> cacheElement = null;
         if (elementSoftReference != null) {
-            hit++;
-            elementSoftReference.get().refreshLastAccess();
+            cacheElement = elementSoftReference.get();
+            if (cacheElement != null) {
+                cacheElement.refreshLastAccess();
+                hit++;
+            }
         } else {
             miss++;
         }
-        return elementSoftReference.get();
+        return cacheElement;
     }
 
     @Override
