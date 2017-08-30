@@ -18,7 +18,6 @@ public class JettyMain {
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(LoginServlet.class, "/login");
-//        context.addServlet(AdminServlet.class, "/admin");
         Server server = new Server(PORT);
         server.setHandler(new HandlerList(resourceHandler, context));
         server.start();

@@ -11,6 +11,9 @@
         password: <input type="text" name="pass"/>
         <br/>
         <input type="submit" value="submit">
+        <#if failureLogin??>
+          Login or password is incorrect!
+        </#if>
     </form>
 </div>
 </body>
