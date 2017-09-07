@@ -1,6 +1,6 @@
 package ru.otus.entityframework.dbservice;
 
-import ru.otus.domain.UserDataSet;
+import ru.otus.domain.AuditDataSet;
 
 /**
  * User: Vladimir Koba
@@ -9,9 +9,11 @@ import ru.otus.domain.UserDataSet;
  */
 public interface DbService {
 
-    void save(UserDataSet user);
+    void save(AuditDataSet audit);
 
-    UserDataSet load(Long id);
+    AuditDataSet load(Long id);
+
+    
 
 
 }

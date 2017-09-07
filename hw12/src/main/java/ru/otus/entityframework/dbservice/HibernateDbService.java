@@ -5,10 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import ru.otus.domain.AddressDataSet;
-import ru.otus.domain.PhoneDataSet;
-import ru.otus.domain.UserDataSet;
-import ru.otus.entityframework.dao.UserDao;
+import ru.otus.domain.AuditDataSet;
+import ru.otus.entityframework.dao.AuditDao;
 
 import java.util.Properties;
 
@@ -25,9 +23,7 @@ public class HibernateDbService implements DbService {
     public HibernateDbService() {
         Properties props = new Properties();
         Configuration configuration = new Configuration();
-        configuration.addAnnotatedClass(UserDataSet.class);
-        configuration.addAnnotatedClass(PhoneDataSet.class);
-        configuration.addAnnotatedClass(AddressDataSet.class);
+        configuration.addAnnotatedClass(AuditDataSet.class);
         props.put("hibernate.dialect", ru.otus.hibernate.SQLiteDialect.class);
         props.put("hibernate.connection.driver_class", "org.sqlite.JDBC");
         props.put("hibernate.connection.url", "jdbc:sqlite:sample.db");
@@ -51,21 +47,21 @@ public class HibernateDbService implements DbService {
     }
 
     @Override
-    public void save(UserDataSet user) {
+    public void save(AuditDataSet audit) {
         try (Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
-            UserDao userDao = new UserDao(session);
-            userDao.save(user);
+            AuditDao auditDao = new AuditDao(session);
+            auditDao.save(audit);
             session.getTransaction().commit();
 
         }
     }
 
     @Override
-    public UserDataSet load(Long id) {
+    public AuditDataSet load(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            UserDao userDao = new UserDao(session);
-            return userDao.load(id);
+            AuditDao auditDao = new AuditDao(session);
+            return auditDao.load(id);
         }
     }
 }

@@ -39,11 +39,9 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("pass");
         if (isValidCredentials(login, password)) {
-            String page = getPage("cache.html", new HashMap<>()); //save to the page
+            String page = getPage("cache.html", cacheParams()); //save to the page
             resp.getWriter().println(page);
             setOK(resp);
-
-            //200 OK, cache params
         } else {
             String page = getPage("login.html", failureLogin());
             resp.getWriter().println(page);
@@ -51,13 +49,13 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    private void saveToCookie(HttpServletResponse response, String requestLogin) {
-        String uuid = UUID.randomUUID().toString();
-        tokenStore.add(uuid);
-        Cookie cacheStatToken = new Cookie("cacheStatToken", uuid);
-        cacheStatToken.setMaxAge(600);
-        response.addCookie(cacheStatToken);
+    private Map<String, Object> cacheParams() {
+        Map<String,Object> map = new HashMap<>();
+        map.put("success",5);
+        map.put("failure",3);
+        return map;
     }
+
 
     private Map<String, Object> failureLogin() {
         Map<String, Object> result = new HashMap<>();

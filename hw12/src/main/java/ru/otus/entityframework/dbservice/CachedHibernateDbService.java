@@ -3,7 +3,7 @@ package ru.otus.entityframework.dbservice;
 import ru.otus.cache.CacheElement;
 import ru.otus.cache.CacheEngine;
 import ru.otus.cache.SimpleCacheEngine;
-import ru.otus.domain.UserDataSet;
+import ru.otus.domain.AuditDataSet;
 
 /**
  * User: Vladimir Koba
@@ -12,7 +12,7 @@ import ru.otus.domain.UserDataSet;
  */
 public class CachedHibernateDbService implements DbService {
     private final HibernateDbService dbService;
-    private final CacheEngine<Long, UserDataSet> cacheEngine;
+    private final CacheEngine<Long, AuditDataSet> cacheEngine;
     private CacheInfo cacheInfo;
 
 
@@ -28,24 +28,24 @@ public class CachedHibernateDbService implements DbService {
     }
 
     @Override
-    public void save(UserDataSet user) {
+    public void save(AuditDataSet user) {
         dbService.save(user);
         cacheEngine.put(new CacheElement<>(user.getId(), user));
     }
 
     @Override
-    public UserDataSet load(Long id) {
-        CacheElement<Long, UserDataSet> cachedUser = cacheEngine.get(id);
+    public AuditDataSet load(Long id) {
+        CacheElement<Long, AuditDataSet> cachedUser = cacheEngine.get(id);
         if (cachedUser != null) {
             if (cacheInfo != null) {
                 cacheInfo.hits(cacheEngine.hitCount());
             }
             return cachedUser.value();
         }
-        UserDataSet loadedUser = dbService.load(id);
-        if (loadedUser != null) {
-            cacheEngine.put(new CacheElement<>(loadedUser.getId(), loadedUser));
+        AuditDataSet loadedAudit = dbService.load(id);
+        if (loadedAudit != null) {
+            cacheEngine.put(new CacheElement<>(loadedAudit.getId(), loadedAudit));
         }
-        return loadedUser;
+        return loadedAudit;
     }
 }
