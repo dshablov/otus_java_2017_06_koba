@@ -5,8 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import ru.otus.domain.AuditDataSet;
-import ru.otus.entityframework.dao.AuditDao;
+import ru.otus.domain.UserDataSet;
+import ru.otus.entityframework.dao.UserDao;
 
 import java.util.Properties;
 
@@ -23,7 +23,7 @@ public class HibernateDbService implements DbService {
     public HibernateDbService() {
         Properties props = new Properties();
         Configuration configuration = new Configuration();
-        configuration.addAnnotatedClass(AuditDataSet.class);
+        configuration.addAnnotatedClass(UserDataSet.class);
         props.put("hibernate.dialect", ru.otus.hibernate.SQLiteDialect.class);
         props.put("hibernate.connection.driver_class", "org.sqlite.JDBC");
         props.put("hibernate.connection.url", "jdbc:sqlite:sample.db");
@@ -47,21 +47,20 @@ public class HibernateDbService implements DbService {
     }
 
     @Override
-    public void save(AuditDataSet audit) {
+    public void save(UserDataSet audit) {
         try (Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
-            AuditDao auditDao = new AuditDao(session);
-            auditDao.save(audit);
+            UserDao userDao = new UserDao(session);
+            userDao.save(audit);
             session.getTransaction().commit();
-
         }
     }
 
     @Override
-    public AuditDataSet load(Long id) {
+    public UserDataSet load(Long id) {
         try (Session session = sessionFactory.openSession()) {
-            AuditDao auditDao = new AuditDao(session);
-            return auditDao.load(id);
+            UserDao userDao = new UserDao(session);
+            return userDao.load(id);
         }
     }
 }
