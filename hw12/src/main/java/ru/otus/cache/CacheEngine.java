@@ -7,6 +7,8 @@ package ru.otus.cache;
  */
 public interface CacheEngine<K, V> {
 
+    V values();
+
     void put(CacheElement<K, V> element);
 
     CacheElement<K, V> get(K key);

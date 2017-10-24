@@ -63,4 +63,12 @@ public class HibernateDbService implements DbService {
             return userDao.load(id);
         }
     }
+
+    @Override
+    public UserDataSet loadByUsernameAndPassword(String username, String password) {
+        try (Session session = sessionFactory.openSession()) {
+            UserDao userDao = new UserDao(session);
+            return userDao.loadByUsernameAndPassword(username, password);
+        }
+    }
 }

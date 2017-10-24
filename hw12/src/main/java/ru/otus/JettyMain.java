@@ -6,6 +6,7 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import ru.otus.servlet.LoginServlet;
+import ru.otus.servlet.RegisterServlet;
 
 public class JettyMain {
 
@@ -18,9 +19,12 @@ public class JettyMain {
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(LoginServlet.class, "/login");
+        context.addServlet(RegisterServlet.class, "/register");
         Server server = new Server(PORT);
         server.setHandler(new HandlerList(resourceHandler, context));
         server.start();
         server.join();
+
+
     }
 }

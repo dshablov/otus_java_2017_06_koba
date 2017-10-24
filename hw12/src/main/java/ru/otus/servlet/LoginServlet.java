@@ -1,12 +1,16 @@
 package ru.otus.servlet;
 
+import ru.otus.template.TemplateUtils;
+
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
+
+import static ru.otus.util.ServletUtils.writeResponse;
 
 /**
  * Created by vkoba on 27.08.2017.
@@ -19,33 +23,21 @@ public class LoginServlet extends HttpServlet {
     static {
         credentialStore = new HashMap<>();
         credentialStore.put("admin", "admin");
-        tokenStore = new ArrayList<>();
     }
 
-    private static String getPage(String templateName, Map<String, Object> params) throws IOException {
-        return TemplateProcessor.instance().getPage(templateName, params);
 
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String page = getPage("login.html", new HashMap<>()); //save to the page
-        resp.getWriter().println(page);
-        setOK(resp);
+        writeResponse(resp, TemplateUtils.getPage("login.html", new HashMap<>()), HttpServletResponse.SC_OK); //save to the page, HttpServletResponse.SC_OK);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("pass");
-        if (isValidCredentials(login, password)) {
-            String page = getPage("cache.html", cacheParams()); //save to the page
-            resp.getWriter().println(page);
-            setOK(resp);
+        if (isValidCredentials(req.getParameter("login"), req.getParameter("pass"))) {
+            writeResponse(resp, TemplateUtils.getPage("cache.html", cacheParams()), HttpServletResponse.SC_OK); //save to the page, HttpServletResponse.SC_OK);
         } else {
-            String page = getPage("login.html", failureLogin());
-            resp.getWriter().println(page);
-            set403(resp);
+            writeResponse(resp, TemplateUtils.getPage("login.html", failureLogin()), HttpServletResponse.SC_FORBIDDEN);
         }
     }
 
@@ -63,20 +55,5 @@ public class LoginServlet extends HttpServlet {
         return result;
     }
 
-    private void setOK(HttpServletResponse response) {
-        response.setContentType("text/html;charset=utf-8");
-        response.setStatus(HttpServletResponse.SC_OK);
-    }
 
-    private void set403(HttpServletResponse response) {
-        response.setContentType("text/html;charset=utf-8");
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-    }
-
-    private boolean isValidCredentials(String login, String password) {
-        if (login == null || password == null) {
-            return false;
-        }
-        return Objects.equals(password, credentialStore.get(login));
-    }
 }

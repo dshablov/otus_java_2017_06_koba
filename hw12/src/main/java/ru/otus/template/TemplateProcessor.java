@@ -1,4 +1,4 @@
-package ru.otus.servlet;
+package ru.otus.template;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -10,7 +10,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Map;
 
-class TemplateProcessor {
+public class TemplateProcessor {
     private static final String HTML_DIR = "tml";
     private static TemplateProcessor instance = new TemplateProcessor();
 
@@ -20,11 +20,10 @@ class TemplateProcessor {
         configuration = new Configuration();
     }
 
-    static TemplateProcessor instance() {
+     static TemplateProcessor instance() {
         return instance;
     }
-
-   public String getPage(String filename, Map<String, Object> data) throws IOException {
+    String getPage(String filename, Map<String, Object> data) throws IOException {
         try (Writer stream = new StringWriter()) {
             Template template = configuration.getTemplate(HTML_DIR + File.separator + filename);
             template.process(data, stream);

@@ -1,10 +1,7 @@
 package ru.otus.cache;
 
 import java.lang.ref.SoftReference;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -30,6 +27,7 @@ public class SimpleCacheEngine<K, V> implements CacheEngine<K, V> {
         this.lifeTimeMs = lifeTimeMs > 0 ? lifeTimeMs : 0;
         this.idleTimeMs = idleTimeMs > 0 ? idleTimeMs : 0;
     }
+
 
 
     @Override

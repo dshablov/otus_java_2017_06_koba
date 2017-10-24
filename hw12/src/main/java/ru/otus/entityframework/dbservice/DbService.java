@@ -13,7 +13,7 @@ public interface DbService {
 
     UserDataSet load(Long id);
 
-    
+    UserDataSet loadByUsernameAndPassword(String username, String password);
 
 
 }

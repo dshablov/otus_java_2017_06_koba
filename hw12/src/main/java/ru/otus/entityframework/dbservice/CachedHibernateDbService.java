@@ -1,9 +1,11 @@
 package ru.otus.entityframework.dbservice;
 
+import org.hibernate.Session;
 import ru.otus.cache.CacheElement;
 import ru.otus.cache.CacheEngine;
 import ru.otus.cache.SimpleCacheEngine;
 import ru.otus.domain.UserDataSet;
+import ru.otus.entityframework.dao.UserDao;
 
 /**
  * User: Vladimir Koba
@@ -35,6 +37,22 @@ public class CachedHibernateDbService implements DbService {
 
     @Override
     public UserDataSet load(Long id) {
+        CacheElement<Long, UserDataSet> cachedUser = cacheEngine.get(id);
+        if (cachedUser != null) {
+            if (cacheInfo != null) {
+                cacheInfo.hits(cacheEngine.hitCount());
+            }
+            return cachedUser.value();
+        }
+        UserDataSet loadedAudit = dbService.load(id);
+        if (loadedAudit != null) {
+            cacheEngine.put(new CacheElement<>(loadedAudit.getId(), loadedAudit));
+        }
+        return loadedAudit;
+    }
+
+    @Override
+    public UserDataSet loadByUsernameAndPassword(String username, String password) {
         CacheElement<Long, UserDataSet> cachedUser = cacheEngine.get(id);
         if (cachedUser != null) {
             if (cacheInfo != null) {
