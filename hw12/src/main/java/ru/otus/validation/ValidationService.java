@@ -2,8 +2,6 @@ package ru.otus.validation;
 
 import ru.otus.entityframework.dbservice.DbService;
 
-import java.util.Objects;
-
 /**
  * User: Vladimir Koba
  * Date: 24.10.2017
@@ -20,6 +18,6 @@ public class ValidationService {
         if (login == null || password == null) {
             return false;
         }
-        return Objects.equals(password, credentialStore.get(login));
+        return dbService.loadByUsernameAndPassword(login, password) != null;
     }
 }

@@ -28,8 +28,8 @@ public class UserDao {
         return session.load(UserDataSet.class, id);
     }
 
-    public UserDataSet loadByUsernameAndPassword(String username, String password) {
-        Query query = session.createQuery("from userinfo where login = :login and password = :password");
+    public UserDataSet loadByUsername(String username, String password) {
+        Query query = session.createQuery("from UserDataSet where login = :login and password = :password");
         query.setParameter("login", username);
         query.setParameter("password", password);
         List list = query.list();

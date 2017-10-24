@@ -15,6 +15,11 @@ public class UserDataSet extends DataSet {
     @Column
     private String password;
 
+
+    public UserDataSet() {
+        super(null);
+    }
+
     public UserDataSet(Long id, String login, String password) {
         super(id);
         this.login = login;

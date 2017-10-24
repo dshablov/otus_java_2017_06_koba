@@ -12,7 +12,7 @@ public class CacheInfo {
         this.cacheHits = cacheHits;
     }
 
-    public long cacheHits() {
+    public long hits() {
         return cacheHits;
     }
 
